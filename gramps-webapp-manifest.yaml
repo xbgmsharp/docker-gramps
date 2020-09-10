@@ -1,0 +1,18 @@
+image: xbgmsharp/docker-gramps-webapp:latest
+tags: ['latest']
+manifests:
+ -
+   image: xbgmsharp/docker-gramps-webapp:arm
+   platform:
+     architecture: arm
+     os: linux
+ -
+   image: xbgmsharp/docker-gramps-webapp:aarch64
+   platform:
+     architecture: arm64
+     os: linux
+ -
+   image: xbgmsharp/docker-gramps-webapp:amd64
+   platform:
+     architecture: amd64
+     os: linux
