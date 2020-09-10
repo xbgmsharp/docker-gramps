@@ -1,8 +1,8 @@
-Docker Gramps [![Docker Pulls](https://img.shields.io/docker/pulls/xbgmsharp/docker-gramps.svg)](https://hub.docker.com/r/xbgmsharp/docker-magicmirror/)[![Build Status](https://travis-ci.com/xbgmsharp/docker-MagicMirror.svg?branch=master)](https://travis-ci.com/xbgmsharp/docker-gramps)
+Docker Gramps [![Docker Pulls](https://img.shields.io/docker/pulls/xbgmsharp/docker-gramps.svg)](https://hub.docker.com/r/xbgmsharp/docker-gramps/)[![Build Status](https://travis-ci.com/xbgmsharp/docker-gramps.svg?branch=master)](https://travis-ci.com/xbgmsharp/docker-gramps)
 
-Docker GrampsWebAPI [![Docker Pulls](https://img.shields.io/docker/pulls/xbgmsharp/docker-gramps-webapi.svg)](https://hub.docker.com/r/xbgmsharp/docker-magicmirror/)[![Build Status](https://travis-ci.com/xbgmsharp/docker-MagicMirror.svg?branch=master)](https://travis-ci.com/xbgmsharp/docker-gramps-webapi)
+Docker GrampsWebAPI [![Docker Pulls](https://img.shields.io/docker/pulls/xbgmsharp/docker-gramps-webapi.svg)](https://hub.docker.com/r/xbgmsharp/docker-gramps/)[![Build Status](https://travis-ci.com/xbgmsharp/docker-gramps.svg?branch=master)](https://travis-ci.com/xbgmsharp/docker-gramps-webapi)
 
-Docker GrampsWebApp [![Docker Pulls](https://img.shields.io/docker/pulls/xbgmsharp/docker-gramps-webapp.svg)](https://hub.docker.com/r/xbgmsharp/docker-magicmirror/)[![Build Status](https://travis-ci.com/xbgmsharp/docker-MagicMirror.svg?branch=master)](https://travis-ci.com/xbgmsharp/docker-gramps-webapp)
+Docker GrampsWebApp [![Docker Pulls](https://img.shields.io/docker/pulls/xbgmsharp/docker-gramps-webapp.svg)](https://hub.docker.com/r/xbgmsharp/docker-gramps/)[![Build Status](https://travis-ci.com/xbgmsharp/docker-gramps.svg?branch=master)](https://travis-ci.com/xbgmsharp/docker-gramps-webapp)
 
 # Docker Gramps
 
@@ -56,7 +56,7 @@ Container images are configured using parameters passed at runtime (such as thos
 
 | Parameter | Function |
 | :----: | --- |
-| `-p 8080` | require for magicmirror to function |
+| `-p 8080` | require for gramps to function |
 | `-e TREE='Family Tree 1'` | (require) **Important:**. Family tree to open (can also be set by the -O tag on the command line, see above |
 | `-e GRAMPS_USER_DB_URI=sqlite:////gramps/gramps_webapp_users.sqlite` | (require) **Important:**SQLAlchemy compatible URI for the user database when using SQL authentication. |
 | `-e PUID=1000` | for UserID (optional) |

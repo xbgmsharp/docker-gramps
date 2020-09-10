@@ -35,17 +35,17 @@ for arch in ${IMAGE_ARCH}; do
   docker build \
          --build-arg ARCH=${arch} \
          --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
-         -t $DOCKER_USER/docker-gramps:${arch} \
+         -t ${DOCKER_USER}/docker-gramps:${arch} \
          -f gramps.Dockerfile .
   docker build \
          --build-arg ARCH=${arch} \
          --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
-         -t $DOCKER_USER/docker-gramps-webapp:${arch} \
+         -t ${DOCKER_USER}/docker-gramps-webapp:${arch} \
          -f gramps-webapp.Dockerfile .
   docker build \
          --build-arg ARCH=${arch} \
          --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
-         -t $DOCKER_USER/docker-gramps-webapi:${arch} \
+         -t ${DOCKER_USER}/docker-gramps-webapi:${arch} \
          -f gramps-webapi.Dockerfile .
 done
 
