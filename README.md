@@ -70,7 +70,14 @@ You need to configure your Gramps Web App to manage your tree and users.
 
 Add user `myuser` with password `mypassword`.
 ```bash
-docker run -i -e TREE='Family Tree 1' -e GRAMPS_USER_DB_URI=sqlite:////gramps/gramps_webapp_users.sqlite -v $(pwd):/gramps -v $(pwd):/root/.gramps/grampsdb/ -e GUNICORN_CMD_ARGS='--bind=:4200 --workers=4' -t xbgmsharp/gramps-webapp:latest python3 -m gramps_webapp user sqlite:////gramps/gramps_webapp_users.sqlite add myuser mypassword
+docker run -i \ 
+  -e TREE='Family Tree 1' \
+  -e GRAMPS_USER_DB_URI=sqlite:////gramps/gramps_webapp_users.sqlite \
+  -v $(pwd):/gramps \
+  -v $(pwd):/root/.gramps/grampsdb/ \
+  -e GUNICORN_CMD_ARGS='--bind=:4200 --workers=4' \
+  -t xbgmsharp/gramps-webapp:latest \
+  python3 -m gramps_webapp user sqlite:////gramps/gramps_webapp_users.sqlite add myuser mypassword
 ```
 # Updating Info
 
@@ -87,16 +94,17 @@ Below are the instructions for updating containers:
 * You can also remove the old dangling images: `docker image prune`
 
 ```bash
-docker pull xbgmsharp/docker-magicmirror
+docker pull xbgmsharp/docker-gramps-webapp
 docker stop gramps_webapp
 docker rm gramps_webapp
 docker create \
+  -e TREE='Family Tree 1' \
+  -e GRAMPS_USER_DB_URI=sqlite:////gramps/gramps_webapp_users.sqlite \
   -e PUID=1000 \
   -e PGID=100 \
   -e TZ=Europe/Paris \
   --restart unless-stopped \
   --publish 8181:8080 \
-  --volume ~/gramps_webapp/config:/opt/gramps_webapp/config \
   --volume ~/gramps_webapp/modules:/opt/gramps_webapp/modules \
   --volume ~/gramps_webapp/css:/opt/gramps_webapp/css \
   --name gramps_webapp xbgmsharp/docker-gramps-webapp
@@ -104,7 +112,6 @@ docker start gramps_webapp
 ```
 
 # Contribution
-I'm happy to accept Pull Requests! Please note that this project is released with a [Contributor Code of Conduct](https://github.com/xbgmsharp/docker-MagicMirror/blob/master/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+I'm happy to accept Pull Requests!
 
 # License
-[MIT](https://github.com/xbgmsharp/docker-MagicMirror/blob/master/LICENSE) ❤️
