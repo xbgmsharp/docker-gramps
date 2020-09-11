@@ -1,7 +1,15 @@
-ARG ARCH=amd64
+ARG ARCH
+ARG BUILD_DATE
 FROM ${ARCH}/ubuntu:latest
+
 ARG QEMU_BIN=qemu-x86_64-static
 ARG GRAMPS_RELEASE=5.0.0
+
+LABEL build_version="Gramps version:- ${GRAMPS_RELEASE} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="xbgmsharp"
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LC_ALL=C.UTF-8
 
 ADD https://github.com/gramps-project/gramps/releases/download/v${GRAMPS_RELEASE}/gramps_${GRAMPS_RELEASE}-1_all.deb /tmp/gramps_latest.deb
 

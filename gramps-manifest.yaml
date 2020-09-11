@@ -2,12 +2,12 @@ image: xbgmsharp/docker-gramps:latest
 tags: ['latest']
 manifests:
  -
-   image: xbgmsharp/docker-gramps:arm
+   image: xbgmsharp/docker-gramps:arm32v7
    platform:
      architecture: arm
      os: linux
  -
-   image: xbgmsharp/docker-gramps:aarch64
+   image: xbgmsharp/docker-gramps:arm64v8
    platform:
      architecture: arm64
      os: linux
@@ -15,4 +15,9 @@ manifests:
    image: xbgmsharp/docker-gramps:amd64
    platform:
      architecture: amd64
+     os: linux
+ -
+   image: xbgmsharp/docker-gramps:i386
+   platform:
+     architecture: i386
      os: linux

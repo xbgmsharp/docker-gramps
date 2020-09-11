@@ -1,8 +1,12 @@
 ARG ARCH=amd64
 FROM xbgmsharp/docker-gramps:${ARCH}
+ARG GRAMPS_RELEASE=5.0.0
+ARG BUILD_DATE
+LABEL build_version="Gramps version:- ${GRAMPS_RELEASE} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="xbgmsharp"
 
 RUN echo "**** install packages ****" && \
-    apt update && apt install -y git unzip python3-pip zlib1g-dev libjpeg-dev libpng-dev
+    apt update && apt install -y git python3-pip zlib1g-dev libjpeg-dev libpng-dev
 
 RUN echo "**** install gramps-webapp ****" && \
     python3 -m pip install --user git+https://github.com/DavidMStraub/gramps-webapp.git --upgrade && \
@@ -19,15 +23,10 @@ RUN echo "**** cleanup ****" && \
 
 ENV TREE 'Family Tree 1'
 ENV GRAMPS_USER_DB_URI sqlite:////gramps/gramps_webapp_users.sqlite
-ENV GRAMPS_S3_BUCKET_NAME false
-ENV JWT_SECRET_KEY ''
-ENV GRAMPS_EXCLUDE_PRIVATE false
-ENV GRAMPS_EXCLUDE_LIVING false
-ENV GRAMPS_AUTH_PROVIDER sql
+ENV GRAMPSHOME=/gramps
 ENV GUNICORN_CMD_ARGS "--bind=:8080 --workers=4"
 
 EXPOSE 8080
-VOLUME /root/.gramps/grampsdb/
 VOLUME /gramps/
 
 CMD ["gunicorn", "gramps_webapp.wsgi:app"]

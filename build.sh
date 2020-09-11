@@ -6,6 +6,7 @@ set -e
 QEMU_RELEASE=`curl -s https://api.github.com/repos/multiarch/qemu-user-static/releases/latest | jq -r ".tag_name"`
 MANIFEST_RELEASE=`curl -s https://api.github.com/repos/estesp/manifest-tool/releases/latest | jq -r ".tag_name"`
 GRAMPS_RELEASE=`curl -s https://api.github.com/repos/gramps-project/gramps/releases/latest | jq -r ".tag_name" | cut -c 2-`
+BUILD_DATE=`date +%m/%d/%Y`
 
 echo "QEMU resgistering ..."
 # resgister qemu arch
@@ -38,7 +39,7 @@ for arch in ${IMAGE_ARCH}; do
   docker build \
          --build-arg ARCH=${arch} \
          --build-arg GRAMPS_RELEASE=${GRAMPS_RELEASE} \
-         --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
+         --build-arg BUILD_DATE=${BUILD_DATE} \
          -t ${DOCKER_USER}/docker-gramps:${arch} \
          -f gramps.Dockerfile .
   docker build \
