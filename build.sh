@@ -44,10 +44,12 @@ for arch in ${IMAGE_ARCH}; do
          -f gramps.Dockerfile .
   docker build \
          --build-arg ARCH=${arch} \
+         --build-arg BUILD_DATE=${BUILD_DATE} \
          -t ${DOCKER_USER}/docker-gramps-webapp:${arch} \
          -f gramps-webapp.Dockerfile .
   docker build \
          --build-arg ARCH=${arch} \
+         --build-arg BUILD_DATE=${BUILD_DATE} \
          -t ${DOCKER_USER}/docker-gramps-webapi:${arch} \
          -f gramps-webapi.Dockerfile .
 done

@@ -1,6 +1,6 @@
 ARG ARCH=amd64
 FROM xbgmsharp/docker-gramps:${ARCH}
-ARG GRAMPS_RELEASE=5.0.0
+ARG GRAMPS_RELEASE
 ARG BUILD_DATE
 LABEL build_version="Gramps version:- ${GRAMPS_RELEASE} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="xbgmsharp"
@@ -13,7 +13,7 @@ RUN echo "**** install gramps-webapp ****" && \
     python3 -m pip install gunicorn
 
 RUN echo "**** cleanup ****" && \
-    apt-get purge -y openssh-client gcc g++ python3-xdg git build-essential libc6-dev linux-libc-dev python3-pip zlib1g-dev libjpeg-dev libpng-dev ubuntu-mono && \
+#    apt-get purge -y openssh-client gcc g++ python3-xdg git build-essential libc6-dev linux-libc-dev python3-pip zlib1g-dev libjpeg-dev libpng-dev ubuntu-mono && \
     apt-get clean && \
     rm -rf \
         /tmp/* \

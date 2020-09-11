@@ -19,5 +19,5 @@ manifests:
  -
    image: xbgmsharp/docker-gramps:i386
    platform:
-     architecture: i386
+     architecture: 386
      os: linux
