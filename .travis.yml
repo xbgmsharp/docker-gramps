@@ -16,11 +16,11 @@ after_success:
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
       docker images
       echo $DOCKER_PASS | docker login --username $DOCKER_USER --password-stdin
-      #docker images | grep "gramps" | awk '{print $1":"$2}' | xargs -I {} docker push {}
-      #docker push $DOCKER_USER/docker-gramps:latest
-      #./manifest-tool push from-spec gramps-manifest.yaml
-      #./manifest-tool push from-spec gramps-webapp-manifest.yaml
-      #./manifest-tool push from-spec gramps-webapi-manifest.yaml
+      docker images | grep "gramps" | awk '{print $1":"$2}' | xargs -I {} docker push {}
+      docker push $DOCKER_USER/docker-gramps:latest
+      ./manifest-tool push from-spec gramps-manifest.yaml
+      ./manifest-tool push from-spec gramps-webapp-manifest.yaml
+      ./manifest-tool push from-spec gramps-webapi-manifest.yaml
     fi
 after_script:
   - docker logout
