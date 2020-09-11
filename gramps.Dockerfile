@@ -1,7 +1,7 @@
 ARG ARCH
+FROM ${ARCH}/ubuntu:latest
 ARG BUILD_DATE
 ARG GRAMPS_RELEASE
-FROM ${ARCH}/ubuntu:latest
 
 LABEL build_version="Gramps version:- ${GRAMPS_RELEASE} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="xbgmsharp"
