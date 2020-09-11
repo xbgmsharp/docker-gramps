@@ -9,7 +9,7 @@ RUN echo "**** install gramps-webapp ****" && \
     python3 -m pip install gunicorn
 
 RUN echo "**** cleanup ****" && \
-    apt-get purge -y openssh-client gcc g++ python3-pip git build-essential libc6-dev linux-libc-dev python3-pip zlib1g-dev libjpeg-dev libpng-dev && \
+    apt-get purge -y openssh-client gcc g++ python3-xdg git build-essential libc6-dev linux-libc-dev python3-pip zlib1g-dev libjpeg-dev libpng-dev ubuntu-mono && \
     apt-get clean && \
     rm -rf \
         /tmp/* \

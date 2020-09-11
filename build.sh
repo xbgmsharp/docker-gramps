@@ -1,13 +1,16 @@
 #!/bin/bash -x
 # From https://hub.docker.com/_/node
 
-QEMU_RELEASE="v5.1.0-2"
-
 set -e
+
+QEMU_RELEASE=`curl -s https://api.github.com/repos/multiarch/qemu-user-static/releases/latest | jq -r ".tag_name"`
+MANIFEST_RELEASE=`curl -s https://api.github.com/repos/estesp/manifest-tool/releases/latest | jq -r ".tag_name"`
+GRAMPS_RELEASE=`curl -s https://api.github.com/repos/gramps-project/gramps/releases/latest | jq -r ".tag_name" | cut -c 2-`
 
 echo "QEMU resgistering ..."
 # resgister qemu arch
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
+#docker run --rm --privileged multiarch/qemu-user-static:register --reset
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
 echo "QEMU downloading ..."
 # Download latest QEMU to add per image arch
@@ -34,24 +37,23 @@ for arch in ${IMAGE_ARCH}; do
   fi
   docker build \
          --build-arg ARCH=${arch} \
+         --build-arg GRAMPS_RELEASE=${GRAMPS_RELEASE} \
          --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
          -t ${DOCKER_USER}/docker-gramps:${arch} \
          -f gramps.Dockerfile .
   docker build \
          --build-arg ARCH=${arch} \
-         --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
          -t ${DOCKER_USER}/docker-gramps-webapp:${arch} \
          -f gramps-webapp.Dockerfile .
   docker build \
          --build-arg ARCH=${arch} \
-         --build-arg QEMU_BIN=qemu-${QEMU_ARCH}-static \
          -t ${DOCKER_USER}/docker-gramps-webapi:${arch} \
          -f gramps-webapi.Dockerfile .
 done
 
 echo "Manifest downloading ..."
 # Download Docker Manifet tool
-wget -Nq https://github.com/estesp/manifest-tool/releases/download/v1.0.2/manifest-tool-linux-amd64
+wget -Nq https://github.com/estesp/manifest-tool/releases/download/${MANIFEST_RELEASE}/manifest-tool-linux-amd64
 mv manifest-tool-linux-amd64 manifest-tool
 chmod +x manifest-tool
 ./manifest-tool --help # Just to check that it's working
